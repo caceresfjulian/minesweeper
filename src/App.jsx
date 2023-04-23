@@ -2,6 +2,7 @@ import { useState } from "react";
 import InitScreen from "./components/InitScreen.jsx";
 import Board from "./components/Board.jsx";
 import Records from "./components/Records.jsx";
+import MobileOverlay from "./components/MobileOverlay.jsx";
 
 function App() {
   const [size, setSize] = useState(0);
@@ -42,6 +43,7 @@ function App() {
       )}
       {size !== 0 && <Board size={size} setSize={setSize} />}
       {records && <Records toggleRecords={toggleRecords} />}
+      <MobileOverlay />
     </main>
   );
 }
