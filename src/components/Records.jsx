@@ -16,16 +16,16 @@ function Records({ toggleRecords }) {
       }}
     >
       <h2>Records</h2>
-      {recordList.length && (
-        <table style={{ marginTop: "15px" }}>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Board size</th>
-              <th>Time</th>
-            </tr>
-          </thead>
+      <table style={{ marginTop: "15px" }}>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Board size</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        {recordList.length > 0 && (
           <tbody>
             {recordList.map(({ date, id, size, time }) => (
               <tr key={id}>
@@ -36,8 +36,8 @@ function Records({ toggleRecords }) {
               </tr>
             ))}
           </tbody>
-        </table>
-      )}
+        )}
+      </table>
       <button
         type="button"
         onClick={toggleRecords}
