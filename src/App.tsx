@@ -1,14 +1,15 @@
 import { useState } from "react";
-import InitScreen from "./components/InitScreen.jsx";
-import Board from "./components/Board.jsx";
-import Records from "./components/Records.jsx";
-import MobileOverlay from "./components/MobileOverlay.jsx";
+import { InitForm } from "./App.types.js";
+import Board from "./components/Board";
+import InitScreen from "./components/InitScreen";
+import MobileOverlay from "./components/MobileOverlay";
+import Records from "./components/Records";
 
-function App() {
-  const [size, setSize] = useState(0);
-  const [records, setRecords] = useState(false);
+function App(): JSX.Element {
+  const [size, setSize] = useState<number>(0);
+  const [records, setRecords] = useState<boolean>(false);
 
-  const handleCreateBoard = (e) => {
+  const handleCreateBoard = (e: InitForm) => {
     e.preventDefault();
     const {
       target: {
@@ -21,7 +22,7 @@ function App() {
     setSize(Number(value));
   };
 
-  const toggleRecords = () => {
+  const toggleRecords = (): void => {
     setRecords((r) => !r);
   };
 

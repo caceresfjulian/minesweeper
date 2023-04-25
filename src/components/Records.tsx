@@ -1,9 +1,12 @@
-import PropTypes from "prop-types";
-import recordsInterface from "../utils/recordsInterface";
 import moment from "moment";
 import formatTimekeeper from "../utils/formatTimekeeper";
+import recordsInterface from "../utils/recordsInterface";
 
-function Records({ toggleRecords }) {
+type RecordsProps = {
+  toggleRecords: () => void;
+};
+
+function Records({ toggleRecords }: RecordsProps): JSX.Element {
   const recordList = recordsInterface.getRecords();
 
   return (
@@ -48,9 +51,5 @@ function Records({ toggleRecords }) {
     </div>
   );
 }
-
-Records.propTypes = {
-  toggleRecords: PropTypes.func.isRequired,
-};
 
 export default Records;

@@ -1,4 +1,4 @@
-function formatTimekeeper(count) {
+function formatTimekeeper(count: number): string {
   const hours = Math.floor(count / 360);
   count -= hours * 360;
 
@@ -8,7 +8,7 @@ function formatTimekeeper(count) {
   return `${addLeftZero(hours)}:${addLeftZero(minutes)}:${addLeftZero(count)}`;
 }
 
-function addLeftZero(num) {
+function addLeftZero(num: number): string {
   return `${num < 10 ? `0${num}` : num}`;
 }
 

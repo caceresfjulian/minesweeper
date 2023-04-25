@@ -1,4 +1,7 @@
-const isValid = ([y, x], board, visited) => {
+import { Dispatch, SetStateAction } from "react";
+import { Board, Coordinates } from "./Types";
+
+const isValid = ([y, x]: Coordinates, board: Board, visited: Set<string>) => {
   const key = `${y},${x}`;
   return (
     !visited.has(key) &&
@@ -9,10 +12,15 @@ const isValid = ([y, x], board, visited) => {
   );
 };
 
-const traverse = (start, board, callback, visited = new Set()) => {
+const traverse = (
+  start: Coordinates,
+  board: Board,
+  callback: (x: Coordinates) => void,
+  visited = new Set()
+) => {
   const [y, x] = start;
 
-  if (!isValid(start, board, visited)) {
+  if (!isValid(start, board, visited as Set<string>)) {
     return;
   }
 
@@ -39,9 +47,14 @@ const traverse = (start, board, callback, visited = new Set()) => {
   }
 };
 
-const revealNeighbors = ([y, x], board, game, setGame) => {
+const revealNeighbors = (
+  [y, x]: Coordinates,
+  board: Board,
+  game: Board,
+  setGame: Dispatch<SetStateAction<Board>>
+) => {
   const updatedGame = [...game];
-  const emptyBoxes = [];
+  const emptyBoxes: Coordinates[] = [];
 
   traverse([y, x], board, ([ny, nx]) => {
     if (game[ny][nx]) return;

@@ -1,4 +1,4 @@
-function MobileOverlay() {
+function MobileOverlay(): JSX.Element {
   return (
     <div className="overlay">
       <div

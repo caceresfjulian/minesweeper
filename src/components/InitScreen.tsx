@@ -1,6 +1,14 @@
-import PropTypes from "prop-types";
+import { InitForm } from "../App.types";
 
-export default function InitScreen({ createBoard, toggleRecords }) {
+type InitScreenProps = {
+  createBoard: (e: InitForm) => void;
+  toggleRecords: () => void;
+};
+
+export default function InitScreen({
+  createBoard,
+  toggleRecords,
+}: InitScreenProps): JSX.Element {
   return (
     <>
       <h1>Minesweeper</h1>
@@ -41,8 +49,3 @@ export default function InitScreen({ createBoard, toggleRecords }) {
     </>
   );
 }
-
-InitScreen.propTypes = {
-  createBoard: PropTypes.func.isRequired,
-  toggleRecords: PropTypes.func.isRequired,
-};

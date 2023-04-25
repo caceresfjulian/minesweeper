@@ -1,27 +1,32 @@
-import { useMemo, useRef, useState } from "react";
+import moment, { Moment } from "moment";
+import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
+import { Board } from "../utils/Types";
 import createBoard from "../utils/createBoard";
-import createMatrix from "../utils/matrix/createMatrix";
-import revealNeighbors from "../utils/revealNeighbors";
-import PropTypes from "prop-types";
-import TimeKeeper from "./TimeKeeper";
-import moment from "moment";
-import recordsInterface from "../utils/recordsInterface";
 import countCoincidences from "../utils/matrix/countCoincidences";
+import createMatrix from "../utils/matrix/createMatrix";
+import recordsInterface from "../utils/recordsInterface";
+import revealNeighbors from "../utils/revealNeighbors";
+import TimeKeeper from "./TimeKeeper";
 
-export default function Board({ size, setSize }) {
-  const [game, setGame] = useState(() => createMatrix(size));
-  const [isWinner, setIsWinner] = useState(false);
-  const [didLose, setDidLose] = useState(false);
-  const flagsRef = useRef(0);
-  const stopTimeRef = useRef(false);
-  const initTimeRef = useRef(moment());
+type BoardProps = {
+  size: number;
+  setSize: Dispatch<SetStateAction<number>>;
+};
+
+export default function Board({ size, setSize }: BoardProps) {
+  const [game, setGame] = useState<Board>(() => createMatrix(size));
+  const [isWinner, setIsWinner] = useState<Boolean>(false);
+  const [didLose, setDidLose] = useState<Boolean>(false);
+  const flagsRef = useRef<number>(0);
+  const stopTimeRef = useRef<boolean>(false);
+  const initTimeRef = useRef<Moment>(moment());
 
   const [board, mines] = useMemo(() => {
     const mines = size === 16 ? 40 : size === 8 ? 20 : 8;
     return createBoard(size, mines);
   }, [size]);
 
-  const handleClick = (i, j) => {
+  const handleClick = (i: number, j: number) => {
     if (isWinner) {
       return;
     }
@@ -42,7 +47,12 @@ export default function Board({ size, setSize }) {
       return newGame;
     });
 
-    revealNeighbors([i, j], board, game, setGame);
+    revealNeighbors(
+      [i, j],
+      board,
+      game,
+      setGame as Dispatch<SetStateAction<Board>>
+    );
 
     if (size ** 2 - mines === countCoincidences(game, 1)) {
       setIsWinner(true);
@@ -52,7 +62,7 @@ export default function Board({ size, setSize }) {
     }
   };
 
-  const handleRightClick = (e, i, j) => {
+  const handleRightClick = (i: number, j: number) => {
     if (isWinner || game[i][j] === 1) {
       return;
     }
@@ -158,7 +168,7 @@ export default function Board({ size, setSize }) {
                   }}
                   onClick={() => handleClick(i, j)}
                   onContextMenu={(e) => e.preventDefault()}
-                  onAuxClick={(e) => handleRightClick(e, i, j)}
+                  onAuxClick={() => handleRightClick(i, j)}
                 >
                   {game[i][j] === 1 ? value : "\u00A0"}
                 </span>
@@ -173,8 +183,3 @@ export default function Board({ size, setSize }) {
     </>
   );
 }
-
-Board.propTypes = {
-  size: PropTypes.number.isRequired,
-  setSize: PropTypes.func.isRequired,
-};

@@ -1,18 +1,19 @@
+import { Board, Coordinates } from "./Types";
 import createMatrix from "./matrix/createMatrix";
 
-function createBoard(board_size = 10, mines = 20) {
-  const cached_mines = [];
-  let board = createMatrix(board_size);
+function createBoard(board_size = 10, mines = 20): [Board, number] {
+  const cached_mines: Coordinates[] = [];
+  let board: Board = createMatrix(board_size);
   insertMines(mines, board_size);
   board = populateBoard(cached_mines, board);
 
   return [board, cached_mines.length];
 
-  function generateRandomCoordinate(size) {
+  function generateRandomCoordinate(size: number): Coordinates {
     return [Math.floor(Math.random() * size), Math.floor(Math.random() * size)];
   }
 
-  function insertMines(num, size) {
+  function insertMines(num: number, size: number): void {
     for (let i = 0; i < num; i++) {
       const [y, x] = generateRandomCoordinate(size);
       if (board[y][x] === "x") {
@@ -24,7 +25,7 @@ function createBoard(board_size = 10, mines = 20) {
     }
   }
 
-  function setNeighbors([y, x], board) {
+  function setNeighbors([y, x]: Coordinates, board: Board) {
     const updatedBoard = [...board];
 
     const directions = [
@@ -49,14 +50,14 @@ function createBoard(board_size = 10, mines = 20) {
         nx < board.length &&
         updatedBoard[ny][nx] !== "x"
       ) {
-        updatedBoard[ny][nx]++;
+        (updatedBoard[ny][nx] as number)++;
       }
     });
 
     return updatedBoard;
   }
 
-  function populateBoard(mine_coors, board) {
+  function populateBoard(mine_coors: Coordinates[], board: Board) {
     let updated_board = [...board];
 
     for (let coor of mine_coors) {

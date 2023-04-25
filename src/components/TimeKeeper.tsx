@@ -1,10 +1,13 @@
 import { memo, useEffect, useRef, useState } from "react";
 import formatTimekeeper from "../utils/formatTimekeeper";
-import PropTypes from "prop-types";
 
-const BaseTimeKeeper = ({ stop }) => {
+type BaseTimeKeeperProps = {
+  stop: Boolean;
+};
+
+const BaseTimeKeeper = ({ stop }: BaseTimeKeeperProps) => {
   const [time, setTime] = useState(0);
-  const intervalIdRef = useRef();
+  const intervalIdRef = useRef<number>();
 
   useEffect(() => {
     intervalIdRef.current = setInterval(() => {
@@ -30,9 +33,5 @@ const BaseTimeKeeper = ({ stop }) => {
 };
 
 const TimeKeeper = memo(BaseTimeKeeper);
-
-BaseTimeKeeper.propTypes = {
-  stop: PropTypes.bool.isRequired,
-};
 
 export default TimeKeeper;
