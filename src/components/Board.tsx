@@ -1,30 +1,23 @@
-import moment, { Moment } from "moment";
-import { Dispatch, SetStateAction, useMemo, useRef, useState } from "react";
 import { Board } from "../utils/Types";
-import createBoard from "../utils/createBoard";
-import countCoincidences from "../utils/matrix/countCoincidences";
-import createMatrix from "../utils/matrix/createMatrix";
-import recordsInterface from "../utils/recordsInterface";
 import revealNeighbors from "../utils/revealNeighbors";
 import TimeKeeper from "./TimeKeeper";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../store";
+import {
+  revealTile,
+  updateGame,
+  loseGame,
+  addFlag,
+  removeFlag,
+  resetGame,
+  keepPlaying,
+} from "../features/board/boardSlice";
 
-type BoardProps = {
-  size: number;
-  setSize: Dispatch<SetStateAction<number>>;
-};
-
-export default function Board({ size, setSize }: BoardProps) {
-  const [game, setGame] = useState<Board>(() => createMatrix(size));
-  const [isWinner, setIsWinner] = useState<Boolean>(false);
-  const [didLose, setDidLose] = useState<Boolean>(false);
-  const flagsRef = useRef<number>(0);
-  const stopTimeRef = useRef<boolean>(false);
-  const initTimeRef = useRef<Moment>(moment());
-
-  const [board, mines] = useMemo(() => {
-    const mines = size === 16 ? 40 : size === 8 ? 20 : 8;
-    return createBoard(size, mines);
-  }, [size]);
+export default function Board() {
+  const { game, board, mines, flags, isWinner, didLose, isLoser } = useSelector(
+    (state: RootState) => state.board
+  );
+  const dispatch = useDispatch();
 
   const handleClick = (i: number, j: number) => {
     if (isWinner) {
@@ -32,8 +25,7 @@ export default function Board({ size, setSize }: BoardProps) {
     }
 
     if (board[i][j] === "x" && game[i][j] !== 2) {
-      setDidLose(true);
-      stopTimeRef.current = true;
+      dispatch(loseGame());
       return;
     }
 
@@ -41,25 +33,8 @@ export default function Board({ size, setSize }: BoardProps) {
       return;
     }
 
-    setGame((prevGame) => {
-      const newGame = [...prevGame];
-      newGame[i][j] = 1;
-      return newGame;
-    });
-
-    revealNeighbors(
-      [i, j],
-      board,
-      game,
-      setGame as Dispatch<SetStateAction<Board>>
-    );
-
-    if (size ** 2 - mines === countCoincidences(game, 1)) {
-      setIsWinner(true);
-      if (!stopTimeRef.current) {
-        recordsInterface.setRecords({ size, initTime: initTimeRef.current });
-      }
-    }
+    dispatch(revealTile([i, j]));
+    dispatch(updateGame(revealNeighbors([i, j], board, game)));
   };
 
   const handleRightClick = (i: number, j: number) => {
@@ -68,24 +43,12 @@ export default function Board({ size, setSize }: BoardProps) {
     }
 
     if (game[i][j] === 2) {
-      flagsRef.current -= 1;
-
-      setGame((prevGame) => {
-        const newGame = [...prevGame];
-        newGame[i][j] = 0;
-        return newGame;
-      });
+      dispatch(removeFlag([i, j]));
       return;
     }
 
     if (game[i][j] === 0) {
-      flagsRef.current += 1;
-
-      setGame((prevGame) => {
-        const newGame = [...prevGame];
-        newGame[i][j] = 2;
-        return newGame;
-      });
+      dispatch(addFlag([i, j]));
       return;
     }
   };
@@ -99,11 +62,11 @@ export default function Board({ size, setSize }: BoardProps) {
       )}
       {!isWinner && (
         <>
-          <h4>{`Unmarked mines: ${mines - flagsRef.current}`}</h4>
+          <h4>{`Unmarked mines: ${mines - flags}`}</h4>
         </>
       )}
-      <TimeKeeper stop={isWinner || stopTimeRef.current} />
-      {didLose && (
+      <TimeKeeper stop={isWinner || didLose} />
+      {isLoser && didLose && (
         <div
           style={{
             backgroundColor: "rgba(0,0,0,0.4)",
@@ -133,8 +96,10 @@ export default function Board({ size, setSize }: BoardProps) {
               If you keep playing, your game time won&apos;t be registered
             </p>
             <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
-              <button onClick={() => setDidLose(false)}>Keep playing</button>
-              <button onClick={() => setSize(0)}>Main Screen</button>
+              <button onClick={() => dispatch(keepPlaying())}>
+                Keep playing
+              </button>
+              <button onClick={() => dispatch(resetGame())}>Main Screen</button>
             </div>
           </div>
         </div>
@@ -177,7 +142,10 @@ export default function Board({ size, setSize }: BoardProps) {
           ))}
         </div>
       }
-      <button onClick={() => setSize(0)} style={{ marginTop: "15px" }}>
+      <button
+        onClick={() => dispatch(resetGame())}
+        style={{ marginTop: "15px" }}
+      >
         Main Screen
       </button>
     </>

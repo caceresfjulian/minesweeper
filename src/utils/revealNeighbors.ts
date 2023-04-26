@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { Board, Coordinates } from "./Types";
 
 const isValid = ([y, x]: Coordinates, board: Board, visited: Set<string>) => {
@@ -16,11 +15,11 @@ const traverse = (
   start: Coordinates,
   board: Board,
   callback: (x: Coordinates) => void,
-  visited = new Set()
+  visited: Set<string>
 ) => {
   const [y, x] = start;
 
-  if (!isValid(start, board, visited as Set<string>)) {
+  if (!isValid(start, board, visited)) {
     return;
   }
 
@@ -51,23 +50,28 @@ const revealNeighbors = (
   [y, x]: Coordinates,
   board: Board,
   game: Board,
-  setGame: Dispatch<SetStateAction<Board>>
+  visited = new Set<string>([])
 ) => {
   const updatedGame = [...game];
   const emptyBoxes: Coordinates[] = [];
 
-  traverse([y, x], board, ([ny, nx]) => {
-    if (game[ny][nx]) return;
-    updatedGame[ny][nx] = 1;
+  traverse(
+    [y, x],
+    board,
+    ([ny, nx]) => {
+      if (game[ny][nx]) return;
+      updatedGame[ny] = [...updatedGame[ny]];
+      updatedGame[ny][nx] = 1;
 
-    if (board[ny][nx] === 0) {
-      emptyBoxes.push([ny, nx]);
-    }
-  });
+      if (board[ny][nx] === 0) {
+        emptyBoxes.push([ny, nx]);
+      }
+    },
+    visited
+  );
 
-  setGame(updatedGame);
-
-  emptyBoxes.forEach((coor) => revealNeighbors(coor, board, game, setGame));
+  emptyBoxes.forEach((coor) => revealNeighbors(coor, board, game, visited));
+  return updatedGame;
 };
 
 export default revealNeighbors;

@@ -1,13 +1,13 @@
 import { Board, Coordinates } from "./Types";
 import createMatrix from "./matrix/createMatrix";
 
-function createBoard(board_size = 10, mines = 20): [Board, number] {
+function createBoard(board_size = 5, mines = 8): Board {
   const cached_mines: Coordinates[] = [];
   let board: Board = createMatrix(board_size);
   insertMines(mines, board_size);
   board = populateBoard(cached_mines, board);
 
-  return [board, cached_mines.length];
+  return board;
 
   function generateRandomCoordinate(size: number): Coordinates {
     return [Math.floor(Math.random() * size), Math.floor(Math.random() * size)];

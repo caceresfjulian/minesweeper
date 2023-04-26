@@ -7,7 +7,7 @@ type BaseTimeKeeperProps = {
 
 const BaseTimeKeeper = ({ stop }: BaseTimeKeeperProps) => {
   const [time, setTime] = useState(0);
-  const intervalIdRef = useRef<number>();
+  const intervalIdRef = useRef<NodeJS.Timer>();
 
   useEffect(() => {
     intervalIdRef.current = setInterval(() => {

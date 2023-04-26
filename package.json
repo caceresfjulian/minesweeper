@@ -13,13 +13,16 @@
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "moment": "^2.29.4",
     "nanoid": "^4.0.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5"
   },
   "devDependencies": {
+    "@types/node": "^18.16.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react-swc": "^3.0.0",

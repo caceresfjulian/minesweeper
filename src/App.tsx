@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { InitForm } from "./App.types.js";
 import Board from "./components/Board";
 import InitScreen from "./components/InitScreen";
 import MobileOverlay from "./components/MobileOverlay";
 import Records from "./components/Records";
+import { createGame } from "./features/board/boardSlice.js";
+import { RootState } from "./store.js";
 
 function App(): JSX.Element {
-  const [size, setSize] = useState<number>(0);
-  const [records, setRecords] = useState<boolean>(false);
+  const [showRecords, setShowRecords] = useState<boolean>(false);
+  const game = useSelector((state: RootState) => state.board.game);
+  const dispatch = useDispatch();
 
   const handleCreateBoard = (e: InitForm) => {
     e.preventDefault();
@@ -19,11 +23,11 @@ function App(): JSX.Element {
       },
     } = e;
 
-    setSize(Number(value));
+    dispatch(createGame(Number(value)));
   };
 
   const toggleRecords = (): void => {
-    setRecords((r) => !r);
+    setShowRecords((r) => !r);
   };
 
   return (
@@ -36,14 +40,14 @@ function App(): JSX.Element {
         flexDirection: "column",
       }}
     >
-      {size === 0 && !records && (
+      {game.length === 0 && !showRecords && (
         <InitScreen
           createBoard={handleCreateBoard}
           toggleRecords={toggleRecords}
         />
       )}
-      {size !== 0 && <Board size={size} setSize={setSize} />}
-      {records && <Records toggleRecords={toggleRecords} />}
+      {game.length !== 0 && <Board />}
+      {showRecords && <Records toggleRecords={toggleRecords} />}
       <MobileOverlay />
     </main>
   );
