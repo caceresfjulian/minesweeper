@@ -43,7 +43,7 @@ export const boardSlice = createSlice({
       }
 
       if (action.payload === 5) {
-        state.mines = 10;
+        state.mines = 8;
       }
 
       state.board = createBoard(action.payload, state.mines);
