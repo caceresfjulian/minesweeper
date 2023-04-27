@@ -1,6 +1,6 @@
 function formatTimekeeper(count: number): string {
-  const hours = Math.floor(count / 360);
-  count -= hours * 360;
+  const hours = Math.floor(count / 3600);
+  count -= hours * 3600;
 
   const minutes = Math.floor(count / 60);
   count -= minutes * 60;
