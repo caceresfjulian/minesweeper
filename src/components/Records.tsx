@@ -1,25 +1,26 @@
-import moment from "moment";
-import formatTimekeeper from "../utils/formatTimekeeper";
-import recordsInterface from "../utils/recordsInterface";
+import React from 'react'
+import moment from 'moment'
+import formatTimekeeper from '../utils/formatTimekeeper'
+import recordsInterface from '../utils/recordsInterface'
 
-type RecordsProps = {
-  toggleRecords: () => void;
-};
+interface RecordsProps {
+  toggleRecords: () => void
+}
 
-function Records({ toggleRecords }: RecordsProps): JSX.Element {
-  const recordList = recordsInterface.getRecords();
+function Records ({ toggleRecords }: RecordsProps): JSX.Element {
+  const recordList = recordsInterface.getRecords()
 
   return (
     <div
       style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'column'
       }}
     >
       <h2>Records</h2>
-      <table style={{ marginTop: "15px" }}>
+      <table style={{ marginTop: '15px' }}>
         <thead>
           <tr>
             <th>Date</th>
@@ -32,8 +33,8 @@ function Records({ toggleRecords }: RecordsProps): JSX.Element {
           <tbody>
             {recordList.map(({ date, id, size, time }) => (
               <tr key={id}>
-                <td>{moment(date).format("YYYY-MM-DD")}</td>
-                <td>{moment(date).format("HH:mm:ss")}</td>
+                <td>{moment(date).format('YYYY-MM-DD')}</td>
+                <td>{moment(date).format('HH:mm:ss')}</td>
                 <td>{`${size}x${size}`}</td>
                 <td>{formatTimekeeper(time)}</td>
               </tr>
@@ -44,12 +45,12 @@ function Records({ toggleRecords }: RecordsProps): JSX.Element {
       <button
         type="button"
         onClick={toggleRecords}
-        style={{ marginTop: "15px" }}
+        style={{ marginTop: '15px' }}
       >
         Main screen
       </button>
     </div>
-  );
+  )
 }
 
-export default Records;
+export default Records

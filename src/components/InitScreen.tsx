@@ -1,19 +1,20 @@
-import { InitForm } from "../App.types";
+import React from 'react'
+import { type InitForm } from '../App.types'
 
-type InitScreenProps = {
-  createBoard: (e: InitForm) => void;
-  toggleRecords: () => void;
-};
+interface InitScreenProps {
+  createBoard: (e: InitForm) => void
+  toggleRecords: () => void
+}
 
-export default function InitScreen({
+export default function InitScreen ({
   createBoard,
-  toggleRecords,
+  toggleRecords
 }: InitScreenProps): JSX.Element {
   return (
     <>
       <h1>Minesweeper</h1>
       <h6>By Julian Caceres</h6>
-      <div style={{ maxWidth: "1080px", marginTop: "24px" }}>
+      <div style={{ maxWidth: '1080px', marginTop: '24px' }}>
         <ul>
           <li>Left-click on a square to reveal what is underneath it.</li>
           <li>Right-click on a square to flag it as a mine. </li>
@@ -24,12 +25,12 @@ export default function InitScreen({
         </ul>
         <form
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            width: "100%",
-            marginTop: "40px",
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+            width: '100%',
+            marginTop: '40px'
           }}
           onSubmit={createBoard}
         >
@@ -38,7 +39,7 @@ export default function InitScreen({
             <option value="8">8 x 8</option>
             <option value="5">5 x 5</option>
           </select>
-          <div style={{ display: "flex", marginTop: "15px", gap: "15px" }}>
+          <div style={{ display: 'flex', marginTop: '15px', gap: '15px' }}>
             <button type="submit">Start game</button>
             <button type="button" onClick={toggleRecords}>
               Highest records
@@ -47,5 +48,5 @@ export default function InitScreen({
         </form>
       </div>
     </>
-  );
+  )
 }

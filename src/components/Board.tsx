@@ -1,8 +1,8 @@
-import { Board } from "../utils/Types";
-import revealNeighbors from "../utils/revealNeighbors";
-import TimeKeeper from "./TimeKeeper";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store";
+import React from 'react'
+import revealNeighbors from '../utils/revealNeighbors'
+import TimeKeeper from './TimeKeeper'
+import { useSelector, useDispatch } from 'react-redux'
+import { type RootState } from '../store'
 import {
   revealTile,
   updateGame,
@@ -10,48 +10,47 @@ import {
   addFlag,
   removeFlag,
   resetGame,
-  keepPlaying,
-} from "../features/board/boardSlice";
+  keepPlaying
+} from '../features/board/boardSlice'
 
-export default function Board() {
+export default function Board (): JSX.Element {
   const { game, board, mines, flags, isWinner, didLose, isLoser } = useSelector(
     (state: RootState) => state.board
-  );
-  const dispatch = useDispatch();
+  )
+  const dispatch = useDispatch()
 
-  const handleClick = (i: number, j: number) => {
+  const handleClick = (i: number, j: number): void => {
     if (isWinner) {
-      return;
+      return
     }
 
-    if (board[i][j] === "x" && game[i][j] !== 2) {
-      dispatch(loseGame());
-      return;
+    if (board[i][j] === 'x' && game[i][j] !== 2) {
+      dispatch(loseGame())
+      return
     }
 
     if (game[i][j] === 1 || game[i][j] === 2) {
-      return;
+      return
     }
 
-    dispatch(revealTile([i, j]));
-    dispatch(updateGame(revealNeighbors([i, j], board, game)));
-  };
+    dispatch(revealTile([i, j]))
+    dispatch(updateGame(revealNeighbors([i, j], board, game)))
+  }
 
-  const handleRightClick = (i: number, j: number) => {
+  const handleRightClick = (i: number, j: number): void => {
     if (isWinner || game[i][j] === 1) {
-      return;
+      return
     }
 
     if (game[i][j] === 2) {
-      dispatch(removeFlag([i, j]));
-      return;
+      dispatch(removeFlag([i, j]))
+      return
     }
 
     if (game[i][j] === 0) {
-      dispatch(addFlag([i, j]));
-      return;
+      dispatch(addFlag([i, j]))
     }
-  };
+  }
 
   return (
     <>
@@ -69,33 +68,33 @@ export default function Board() {
       {isLoser && didLose && (
         <div
           style={{
-            backgroundColor: "rgba(0,0,0,0.4)",
-            width: "100%",
-            height: "100%",
-            position: "absolute",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            backgroundColor: 'rgba(0,0,0,0.4)',
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
           }}
         >
           <div
             style={{
-              backgroundColor: "white",
-              width: "500px",
-              height: "250px",
-              padding: "35px",
-              textAlign: "center",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "column",
+              backgroundColor: 'white',
+              width: '500px',
+              height: '250px',
+              padding: '35px',
+              textAlign: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'column'
             }}
           >
             <h2>Game over</h2>
-            <p style={{ marginTop: "20px", fontSize: "18px" }}>
+            <p style={{ marginTop: '20px', fontSize: '18px' }}>
               If you keep playing, your game time won&apos;t be registered
             </p>
-            <div style={{ display: "flex", gap: "10px", marginTop: "20px" }}>
+            <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
               <button onClick={() => dispatch(keepPlaying())}>
                 Keep playing
               </button>
@@ -107,9 +106,9 @@ export default function Board() {
       {
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            border: "5px solid black",
+            display: 'flex',
+            flexDirection: 'column',
+            border: '5px solid black'
           }}
         >
           {board.map((row, i) => (
@@ -118,24 +117,24 @@ export default function Board() {
                 <span
                   key={j}
                   style={{
-                    display: "inline",
-                    border: "1px solid gray",
-                    padding: "0 10px",
+                    display: 'inline',
+                    border: '1px solid gray',
+                    padding: '0 10px',
                     cursor: `${
                       isWinner
-                        ? "not-allowed"
-                        : game[i][j]
-                        ? "default"
-                        : "pointer"
+                        ? 'not-allowed'
+                        : game[i][j] !== 0
+                        ? 'default'
+                        : 'pointer'
                     }`,
-                    color: `${game[i][j] === 1 ? "black" : "lightgray"}`,
-                    backgroundColor: `${game[i][j] === 2 ? "pink" : "unset"}`,
+                    color: `${game[i][j] === 1 ? 'black' : 'lightgray'}`,
+                    backgroundColor: `${game[i][j] === 2 ? 'pink' : 'unset'}`
                   }}
-                  onClick={() => handleClick(i, j)}
-                  onContextMenu={(e) => e.preventDefault()}
-                  onAuxClick={() => handleRightClick(i, j)}
+                  onClick={() => { handleClick(i, j) }}
+                  onContextMenu={(e) => { e.preventDefault() }}
+                  onAuxClick={() => { handleRightClick(i, j) }}
                 >
-                  {game[i][j] === 1 ? value : "\u00A0"}
+                  {game[i][j] === 1 ? value : '\u00A0'}
                 </span>
               ))}
             </div>
@@ -144,10 +143,10 @@ export default function Board() {
       }
       <button
         onClick={() => dispatch(resetGame())}
-        style={{ marginTop: "15px" }}
+        style={{ marginTop: '15px' }}
       >
         Main Screen
       </button>
     </>
-  );
+  )
 }

@@ -1,3 +1,3 @@
-export type Coordinates = [number, number];
+export type Coordinates = [number, number]
 
-export type Board = Array<number | string>[];
+export type Board = Array<Array<number | string>>
