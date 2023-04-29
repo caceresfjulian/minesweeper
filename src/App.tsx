@@ -37,7 +37,8 @@ function App (): JSX.Element {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        color: 'var(--main-color)'
       }}
     >
       {game.length === 0 && !showRecords && (

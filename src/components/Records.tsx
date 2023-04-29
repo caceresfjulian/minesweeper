@@ -26,7 +26,7 @@ function Records ({ toggleRecords }: RecordsProps): JSX.Element {
             <th>Date</th>
             <th>Time</th>
             <th>Board size</th>
-            <th>Time</th>
+            <th>Duration</th>
           </tr>
         </thead>
         {recordList.length > 0 && (

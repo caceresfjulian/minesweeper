@@ -79,7 +79,8 @@ export default function Board (): JSX.Element {
         >
           <div
             style={{
-              backgroundColor: 'white',
+              backgroundColor: 'var(--background-color)',
+              border: '1px solid var(--main-color)',
               width: '500px',
               height: '250px',
               padding: '35px',
@@ -108,18 +109,22 @@ export default function Board (): JSX.Element {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            border: '5px solid black'
+            border: '5px solid var(--main-color)'
           }}
         >
           {board.map((row, i) => (
-            <div key={i}>
+            <div key={i} style={{ display: 'flex' }}>
               {row.map((value, j) => (
-                <span
+                <div
                   key={j}
                   style={{
-                    display: 'inline',
-                    border: '1px solid gray',
-                    padding: '0 10px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid var(--main-color)',
+                    width: 30,
+                    height: 30,
+                    flex: 1,
                     cursor: `${
                       isWinner
                         ? 'not-allowed'
@@ -127,15 +132,15 @@ export default function Board (): JSX.Element {
                         ? 'default'
                         : 'pointer'
                     }`,
-                    color: `${game[i][j] === 1 ? 'black' : 'lightgray'}`,
-                    backgroundColor: `${game[i][j] === 2 ? 'pink' : 'unset'}`
+                    color: `${game[i][j] === 1 ? 'var(--main-color)' : 'var(--highlight-color)'}`,
+                    backgroundColor: `${game[i][j] === 2 ? 'var(--highlight-color)' : 'unset'}`
                   }}
                   onClick={() => { handleClick(i, j) }}
                   onContextMenu={(e) => { e.preventDefault() }}
                   onAuxClick={() => { handleRightClick(i, j) }}
                 >
                   {game[i][j] === 1 ? value : '\u00A0'}
-                </span>
+                </div>
               ))}
             </div>
           ))}
