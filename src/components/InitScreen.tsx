@@ -12,10 +12,16 @@ export default function InitScreen ({
 }: InitScreenProps): JSX.Element {
   return (
     <>
-      <h1>Minesweeper</h1>
+      <h1 style={{
+        textOverflow: 'ellipsis',
+        textAlign: 'center',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        width: '85%'
+      }}>Minesweeper</h1>
       <h6>By Julian Caceres</h6>
       <div style={{ maxWidth: '1080px', marginTop: '24px' }}>
-        <ul>
+        <ul style={{ padding: '0 15px 0 50px' }}>
           <li>Left-click on a square to reveal what is underneath it.</li>
           <li>Right-click on a square to flag it as a mine. </li>
           <li>

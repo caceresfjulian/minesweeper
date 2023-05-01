@@ -5,7 +5,8 @@ function MobileOverlay (): JSX.Element {
     <div className="overlay">
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--background-color)',
+          border: '1px solid var(--main-color)',
           width: '75%',
           maxWidth: '500px',
           height: '250px',
