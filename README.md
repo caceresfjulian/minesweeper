@@ -2,9 +2,11 @@
 
 This is a Minesweeper game built with React, Vite, Typescript, Redux and plain CSS. It is deployed on GitHub Pages. To get more techincal details about the game, go to the project's wiki.
 
-## Demo
+## Overview
+![image](https://user-images.githubusercontent.com/47955341/235325607-c78c236a-50d0-4c82-bf62-b0c8932e2675.png)
+![image](https://user-images.githubusercontent.com/47955341/235325622-0dbaaa76-daad-47da-add1-14e68e3ae384.png)
+![image](https://user-images.githubusercontent.com/47955341/235325638-1f309d25-96f5-46c5-a7ea-f59a7269ad75.png)
 
-https://user-images.githubusercontent.com/47955341/234408405-d05360d9-ee42-4a7d-ae40-da7570ea00d8.mp4
 
 [Live Demo](https://caceresfjulian.github.io/minesweeper/)
 
