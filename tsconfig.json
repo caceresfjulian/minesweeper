@@ -3,7 +3,7 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": ["json-schema"],
+    "types": ["json-schema", "node"],
     "noImplicitAny": true,
     "allowJs": false,
     "skipLibCheck": true,
@@ -17,10 +17,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./typings"
-    ]
+    "typeRoots": ["./node_modules/@types", "./typings"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
