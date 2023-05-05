@@ -17,7 +17,7 @@ export default function InitScreen ({
         textAlign: 'center',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
-        width: '85%'
+        fontSize: 'min(9vw, 56px)'
       }}>Minesweeper</h1>
       <h6>By Julian Caceres</h6>
       <div style={{ maxWidth: '1080px', marginTop: '24px' }}>
