@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react'
-import formatTimekeeper from '../utils/formatTimekeeper'
+import formatTimekeeper from '../../utils/formatTimekeeper'
+import { Header } from './TimeKeeper.styles'
 
 interface BaseTimeKeeperProps {
   stop: boolean
@@ -7,7 +8,7 @@ interface BaseTimeKeeperProps {
 
 const BaseTimeKeeper = ({ stop }: BaseTimeKeeperProps): JSX.Element => {
   const [time, setTime] = useState(0)
-  const intervalIdRef = useRef<NodeJS.Timer>()
+  const intervalIdRef = useRef<number>()
 
   useEffect(() => {
     intervalIdRef.current = setInterval(() => {
@@ -26,9 +27,9 @@ const BaseTimeKeeper = ({ stop }: BaseTimeKeeperProps): JSX.Element => {
   }, [stop])
 
   return (
-    <h4 style={{ padding: '5px 8px', marginBottom: '5px' }}>
+    <Header>
       {formatTimekeeper(time)}
-    </h4>
+    </Header>
   )
 }
 
