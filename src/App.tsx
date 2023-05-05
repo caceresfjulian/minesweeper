@@ -12,6 +12,7 @@ import { toggleTheme } from './features/theme/themeSlice.js'
 
 function App (): JSX.Element {
   const [showRecords, setShowRecords] = useState<boolean>(false)
+  const [formError, setFormError] = useState<boolean>(false)
   const game = useSelector((state: RootState) => state.board.game)
   const dispatch = useDispatch()
 
@@ -20,12 +21,13 @@ function App (): JSX.Element {
     const {
       target: {
         elements: {
-          size: { value }
+          size, difficulty
         }
       }
     } = e
 
-    dispatch(createGame(Number(value)))
+    setFormError(false)
+    dispatch(createGame({ size: Number(size.value), difficulty: difficulty.value }))
   }
 
   const toggleRecords = (): void => {
@@ -43,6 +45,7 @@ function App (): JSX.Element {
         <InitScreen
           createBoard={handleCreateBoard}
           toggleRecords={toggleRecords}
+          formError={formError}
         />
       )}
       {game.length !== 0 && <Board />}

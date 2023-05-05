@@ -28,25 +28,31 @@ const initialState: BoardState = {
   didLose: false
 }
 
+interface CreateGamePayload {
+  size: number
+  difficulty: string
+}
+
 export const boardSlice = createSlice({
   name: 'board',
   initialState,
   reducers: {
-    createGame: (state, action: PayloadAction<number>) => {
-      state.game = createMatrix(action.payload)
-      if (action.payload === 16) {
-        state.mines = 40
+    createGame: (state, action: PayloadAction<CreateGamePayload>) => {
+      state.game = createMatrix(action.payload.size)
+
+      if (action.payload.difficulty === 'easy') {
+        state.mines = Math.floor(action.payload.size * 1.5)
       }
 
-      if (action.payload === 8) {
-        state.mines = 20
+      if (action.payload.difficulty === 'medium') {
+        state.mines = Math.floor(action.payload.size * 2)
       }
 
-      if (action.payload === 5) {
-        state.mines = 8
+      if (action.payload.difficulty === 'hard') {
+        state.mines = Math.floor(action.payload.size * 2)
       }
 
-      state.board = createBoard(action.payload, state.mines)
+      state.board = createBoard(action.payload.size, state.mines)
       state.initTime = moment().toISOString()
     },
     revealTile: (state, { payload: [x, y] }: PayloadAction<Coordinates>) => {

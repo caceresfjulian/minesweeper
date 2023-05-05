@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { BaseInput } from '../common.styles'
 
 export const Title = styled.h1`
   textoverflow: ellipsis;
@@ -27,6 +28,11 @@ export const Form = styled.form`
 `
 export const ButtonsBox = styled.div`
   display: flex;
-  margin-top: 15px;
+  margin-top: 35px;
   gap: 15px;
+`
+
+export const TextInput = styled(BaseInput)`
+  max-width: 120px;
+  margin-top: 15px;
 `

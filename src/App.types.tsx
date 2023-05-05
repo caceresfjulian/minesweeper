@@ -6,6 +6,9 @@ export type InitForm = ChangeEvent<HTMLFormElement> & {
       size: {
         value: string
       }
+      difficulty: {
+        value: string
+      }
     }
   }
 }

@@ -39,3 +39,11 @@ export const BaseModal = styled.div`
   justify-content: center;
   flex-direction: column;
 `
+export const BaseInput = styled.input`
+  font-family: "Silkscreen", cursive;
+  padding: 5px;
+  font-size: 18px;
+  color: ${props => props.theme.mainColor};
+  border: 1px solid ${props => props.theme.mainColor};
+  background-color: ${props => props.theme.bgColor};
+`
