@@ -7,7 +7,8 @@ import MobileOverlay from './components/mobileOverlay/MobileOverlay.js'
 import Records from './components/records/Records.js'
 import { createGame } from './features/board/boardSlice.js'
 import { type RootState } from './store.js'
-import { Main } from './App.styles.js'
+import { Button, Main } from './App.styles.js'
+import { toggleTheme } from './features/theme/themeSlice.js'
 
 function App (): JSX.Element {
   const [showRecords, setShowRecords] = useState<boolean>(false)
@@ -33,6 +34,11 @@ function App (): JSX.Element {
 
   return (
     <Main>
+      <Button
+        onClick={() => dispatch(toggleTheme())}
+      >
+        Toggle theme
+      </Button>
       {game.length === 0 && !showRecords && (
         <InitScreen
           createBoard={handleCreateBoard}
