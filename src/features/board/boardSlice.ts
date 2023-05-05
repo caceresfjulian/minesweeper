@@ -29,7 +29,7 @@ const initialState: BoardState = {
 }
 
 export const boardSlice = createSlice({
-  name: 'counter',
+  name: 'board',
   initialState,
   reducers: {
     createGame: (state, action: PayloadAction<number>) => {
