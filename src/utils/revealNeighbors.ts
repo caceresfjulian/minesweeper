@@ -1,15 +1,19 @@
-import { type Board, type Coordinates } from './Types'
+import { type Board, type Coordinates } from "./Types";
 
-const isValid = ([y, x]: Coordinates, board: Board, visited: Set<string>): boolean => {
-  const key = `${y},${x}`
+const isValid = (
+  [y, x]: Coordinates,
+  board: Board,
+  visited: Set<string>
+): boolean => {
+  const key = `${y},${x}`;
   return (
     !visited.has(key) &&
     y >= 0 &&
     y < board.length &&
     x >= 0 &&
     x < board.length
-  )
-}
+  );
+};
 
 const traverse = (
   start: Coordinates,
@@ -17,14 +21,14 @@ const traverse = (
   callback: (x: Coordinates) => void,
   visited: Set<string>
 ): void => {
-  const [y, x] = start
+  const [y, x] = start;
 
   if (!isValid(start, board, visited)) {
-    return
+    return;
   }
 
-  visited.add(`${y},${x}`)
-  callback(start)
+  visited.add(`${y},${x}`);
+  callback(start);
 
   if (board[y][x] === 0) {
     const directions = [
@@ -35,16 +39,16 @@ const traverse = (
       [-1, -1],
       [-1, 1],
       [1, -1],
-      [1, 1]
-    ]
+      [1, 1],
+    ];
 
     directions.forEach(([deltaY, deltaX]) => {
-      const ny = y + deltaY
-      const nx = x + deltaX
-      traverse([ny, nx], board, callback, visited)
-    })
+      const ny = y + deltaY;
+      const nx = x + deltaX;
+      traverse([ny, nx], board, callback, visited);
+    });
   }
-}
+};
 
 const revealNeighbors = (
   [y, x]: Coordinates,
@@ -52,26 +56,26 @@ const revealNeighbors = (
   game: Board,
   visited = new Set<string>([])
 ): Board => {
-  const updatedGame = [...game]
-  const emptyBoxes: Coordinates[] = []
+  const updatedGame = [...game];
+  const emptyBoxes: Coordinates[] = [];
 
   traverse(
     [y, x],
     board,
     ([ny, nx]) => {
-      if (game[ny][nx] !== 0) return
-      updatedGame[ny] = [...updatedGame[ny]]
-      updatedGame[ny][nx] = 1
+      if (game[ny][nx] !== 0) return;
+      updatedGame[ny] = [...updatedGame[ny]];
+      updatedGame[ny][nx] = 1;
 
       if (board[ny][nx] === 0) {
-        emptyBoxes.push([ny, nx])
+        emptyBoxes.push([ny, nx]);
       }
     },
     visited
-  )
+  );
 
-  emptyBoxes.forEach((coor) => revealNeighbors(coor, board, game, visited))
-  return updatedGame
-}
+  emptyBoxes.forEach((coor) => revealNeighbors(coor, board, game, visited));
+  return updatedGame;
+};
 
-export default revealNeighbors
+export default revealNeighbors;

@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { BaseInput } from '../common.styles'
+import styled from "styled-components";
+import { BaseInput } from "../common.styles";
 
 export const Title = styled.h1`
   textoverflow: ellipsis;
@@ -7,16 +7,16 @@ export const Title = styled.h1`
   whitespace: nowrap;
   overflow: hidden;
   font-size: min(9vw, 56px);
-`
+`;
 
 export const Container = styled.div`
   max-width: 1080px;
   margin-top: 24px;
-`
+`;
 
 export const List = styled.ul`
   padding: 0 15px 0 50px;
-`
+`;
 
 export const Form = styled.form`
   display: flex;
@@ -25,14 +25,14 @@ export const Form = styled.form`
   flex-direction: column;
   width: 100%;
   margin-top: 40px;
-`
+`;
 export const ButtonsBox = styled.div`
   display: flex;
   margin-top: 35px;
   gap: 15px;
-`
+`;
 
 export const TextInput = styled(BaseInput)`
   max-width: 120px;
   margin-top: 15px;
-`
+`;

@@ -1,8 +1,8 @@
-import React from 'react'
-import revealNeighbors from '../../utils/revealNeighbors'
-import TimeKeeper from '../timeKeeper/TimeKeeper'
-import { useSelector, useDispatch } from 'react-redux'
-import { type RootState } from '../../store'
+import React from "react";
+import revealNeighbors from "../../utils/revealNeighbors";
+import TimeKeeper from "../timeKeeper/TimeKeeper";
+import { useSelector, useDispatch } from "react-redux";
+import { type RootState } from "../../store";
 import {
   revealTile,
   updateGame,
@@ -10,49 +10,57 @@ import {
   addFlag,
   removeFlag,
   resetGame,
-  keepPlaying
-} from '../../features/board/boardSlice'
-import { BoardContainer, Button, Cell, GameOverButtonsBox, GameOverText, Overlay, Row } from './Board.styles'
-import { BaseButton, BaseModal } from '../common.styles'
+  keepPlaying,
+} from "../../features/board/boardSlice";
+import {
+  BoardContainer,
+  Button,
+  Cell,
+  GameOverButtonsBox,
+  GameOverText,
+  Overlay,
+  Row,
+} from "./Board.styles";
+import { BaseButton, BaseModal } from "../common.styles";
 
-export default function Board (): JSX.Element {
+export default function Board(): JSX.Element {
   const { game, board, mines, flags, isWinner, didLose, isLoser } = useSelector(
     (state: RootState) => state.board
-  )
-  const dispatch = useDispatch()
+  );
+  const dispatch = useDispatch();
 
   const handleClick = (i: number, j: number): void => {
     if (isWinner) {
-      return
+      return;
     }
 
-    if (board[i][j] === 'x' && game[i][j] !== 2) {
-      dispatch(loseGame())
-      return
+    if (board[i][j] === "x" && game[i][j] !== 2) {
+      dispatch(loseGame());
+      return;
     }
 
     if (game[i][j] === 1 || game[i][j] === 2) {
-      return
+      return;
     }
 
-    dispatch(revealTile([i, j]))
-    dispatch(updateGame(revealNeighbors([i, j], board, game)))
-  }
+    dispatch(revealTile([i, j]));
+    dispatch(updateGame(revealNeighbors([i, j], board, game)));
+  };
 
   const handleRightClick = (i: number, j: number): void => {
     if (isWinner || game[i][j] === 1) {
-      return
+      return;
     }
 
     if (game[i][j] === 2) {
-      dispatch(removeFlag([i, j]))
-      return
+      dispatch(removeFlag([i, j]));
+      return;
     }
 
     if (game[i][j] === 0) {
-      dispatch(addFlag([i, j]))
+      dispatch(addFlag([i, j]));
     }
-  }
+  };
 
   return (
     <>
@@ -78,7 +86,9 @@ export default function Board (): JSX.Element {
               <BaseButton onClick={() => dispatch(keepPlaying())}>
                 Keep playing
               </BaseButton>
-              <BaseButton onClick={() => dispatch(resetGame())}>Main Screen</BaseButton>
+              <BaseButton onClick={() => dispatch(resetGame())}>
+                Main Screen
+              </BaseButton>
             </GameOverButtonsBox>
           </BaseModal>
         </Overlay>
@@ -92,20 +102,24 @@ export default function Board (): JSX.Element {
                   key={j}
                   isWinner={isWinner}
                   revealed={String(game[i][j])}
-                  onClick={() => { handleClick(i, j) }}
-                  onContextMenu={(e) => { e.preventDefault() }}
-                  onAuxClick={() => { handleRightClick(i, j) }}
+                  onClick={() => {
+                    handleClick(i, j);
+                  }}
+                  onContextMenu={(e) => {
+                    e.preventDefault();
+                  }}
+                  onAuxClick={() => {
+                    handleRightClick(i, j);
+                  }}
                 >
-                  {game[i][j] === 1 ? value : '\u00A0'}
+                  {game[i][j] === 1 ? value : "\u00A0"}
                 </Cell>
               ))}
             </Row>
           ))}
         </BoardContainer>
       }
-      <Button onClick={() => dispatch(resetGame())}>
-        Main Screen
-      </Button>
+      <Button onClick={() => dispatch(resetGame())}>Main Screen</Button>
     </>
-  )
+  );
 }

@@ -1,38 +1,34 @@
-import React, { memo, useEffect, useRef, useState } from 'react'
-import formatTimekeeper from '../../utils/formatTimekeeper'
-import { Header } from './TimeKeeper.styles'
+import React, { memo, useEffect, useRef, useState } from "react";
+import formatTimekeeper from "../../utils/formatTimekeeper";
+import { Header } from "./TimeKeeper.styles";
 
 interface BaseTimeKeeperProps {
-  stop: boolean
+  stop: boolean;
 }
 
 const BaseTimeKeeper = ({ stop }: BaseTimeKeeperProps): JSX.Element => {
-  const [time, setTime] = useState(0)
-  const intervalIdRef = useRef<number>()
+  const [time, setTime] = useState(0);
+  const intervalIdRef = useRef<number>();
 
   useEffect(() => {
     intervalIdRef.current = setInterval(() => {
-      setTime((t) => t + 1)
-    }, 1000)
+      setTime((t) => t + 1);
+    }, 1000);
 
     return () => {
-      clearInterval(intervalIdRef.current)
-    }
-  }, [])
+      clearInterval(intervalIdRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     if (stop) {
-      clearInterval(intervalIdRef.current)
+      clearInterval(intervalIdRef.current);
     }
-  }, [stop])
+  }, [stop]);
 
-  return (
-    <Header>
-      {formatTimekeeper(time)}
-    </Header>
-  )
-}
+  return <Header>{formatTimekeeper(time)}</Header>;
+};
 
-const TimeKeeper = memo(BaseTimeKeeper)
+const TimeKeeper = memo(BaseTimeKeeper);
 
-export default TimeKeeper
+export default TimeKeeper;

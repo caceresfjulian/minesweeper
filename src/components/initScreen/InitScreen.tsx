@@ -1,18 +1,18 @@
-import React from 'react'
-import { type InitForm } from '../../App.types'
-import { ButtonsBox, Container, Form, List, Title } from './InitScreen.styles'
-import { BaseButton, BaseSelect } from '../common.styles'
+import React from "react";
+import { type InitForm } from "../../App.types";
+import { ButtonsBox, Container, Form, List, Title } from "./InitScreen.styles";
+import { BaseButton, BaseSelect } from "../common.styles";
 
 interface InitScreenProps {
-  createBoard: (e: InitForm) => void
-  toggleRecords: () => void
-  formError: boolean
+  createBoard: (e: InitForm) => void;
+  toggleRecords: () => void;
+  formError: boolean;
 }
 
-export default function InitScreen ({
+export default function InitScreen({
   createBoard,
   toggleRecords,
-  formError
+  formError,
 }: InitScreenProps): JSX.Element {
   return (
     <>
@@ -28,14 +28,16 @@ export default function InitScreen ({
           </li>
         </List>
         <Form onSubmit={createBoard}>
-          <label>Size:&nbsp;
-          <BaseSelect name="size">
-            <option value="16">16 x 16</option>
-            <option value="8">8 x 8</option>
-            <option value="5">5 x 5</option>
-          </BaseSelect>
+          <label>
+            Size:&nbsp;
+            <BaseSelect name="size">
+              <option value="16">16 x 16</option>
+              <option value="8">8 x 8</option>
+              <option value="5">5 x 5</option>
+            </BaseSelect>
           </label>
-          <label>Difficulty:&nbsp;
+          <label>
+            Difficulty:&nbsp;
             <BaseSelect name="difficulty">
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
@@ -51,5 +53,5 @@ export default function InitScreen ({
         </Form>
       </Container>
     </>
-  )
+  );
 }
