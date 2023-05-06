@@ -180,7 +180,7 @@ M.version="2.29.4";tS(he);M.fn=C;M.min=U_;M.max=H_;M.now=V_;M.utc=qt;M.unix=gx;M
   margin-top: 15px;
 `;function P2({createBoard:e,toggleRecords:t,formError:n}){return E.jsxs(E.Fragment,{children:[E.jsx(k2,{children:"Minesweeper"}),E.jsx("h6",{children:"By Julian Caceres"}),E.jsxs(x2,{children:[E.jsxs(C2,{children:[E.jsx("li",{children:"Left-click on a square to reveal what is underneath it."}),E.jsx("li",{children:"Right-click on a square to flag it as a mine. "}),E.jsx("li",{children:"Use logic and deduction to uncover all the safe squares on the board without detonating any of the mines."})]}),E.jsxs(E2,{onSubmit:e,children:[E.jsxs("label",{children:["Size: ",E.jsxs(mh,{name:"size",children:[E.jsx("option",{value:"16",children:"16 x 16"}),E.jsx("option",{value:"8",children:"8 x 8"}),E.jsx("option",{value:"5",children:"5 x 5"})]})]}),E.jsxs("label",{children:["Difficulty: ",E.jsxs(mh,{name:"difficulty",children:[E.jsx("option",{value:"easy",children:"Easy"}),E.jsx("option",{value:"medium",children:"Medium"}),E.jsx("option",{value:"hard",children:"Hard"})]})]}),E.jsxs(O2,{children:[E.jsx(yr,{type:"submit",children:"Start game"}),E.jsx(yr,{type:"button",onClick:t,children:"Highest records"})]})]})]})]})}const M2=ue(K0)`
   display: none;
-  
+
   @media screen and (max-width: 767px) {
     display: flex;
   }
