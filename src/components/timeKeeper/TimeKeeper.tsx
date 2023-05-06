@@ -8,7 +8,7 @@ interface BaseTimeKeeperProps {
 
 const BaseTimeKeeper = ({ stop }: BaseTimeKeeperProps): JSX.Element => {
   const [time, setTime] = useState(0);
-  const intervalIdRef = useRef<number>();
+  const intervalIdRef = useRef<NodeJS.Timer>();
 
   useEffect(() => {
     intervalIdRef.current = setInterval(() => {
