@@ -4,13 +4,14 @@ import { nanoid } from 'nanoid'
 interface Record {
   id: string
   size: number
+  difficulty: string
   time: number
   date: string
 }
 
 interface RecordsInterface {
   getRecords: () => Record[]
-  setRecords: (data: { size: number, initTime: Moment }) => void
+  setRecords: (data: { size: number, difficulty: string, initTime: Moment }) => void
 }
 
 const recordsInterface: RecordsInterface = {
@@ -21,11 +22,12 @@ const recordsInterface: RecordsInterface = {
     return records
   },
 
-  setRecords ({ size, initTime }) {
+  setRecords ({ size, difficulty, initTime }) {
     const storedRecords = this.getRecords()
     storedRecords.push({
       id: nanoid(),
       size,
+      difficulty,
       time: moment().diff(initTime, 'seconds'),
       date: new Date().toISOString()
     })

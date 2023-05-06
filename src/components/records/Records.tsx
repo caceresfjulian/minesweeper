@@ -19,16 +19,18 @@ function Records ({ toggleRecords }: RecordsProps): JSX.Element {
           <tr>
             <Th>Date</Th>
             <Th>Time</Th>
+            <Th>Difficulty</Th>
             <Th>Board size</Th>
             <Th>Duration</Th>
           </tr>
         </thead>
         {recordList.length > 0 && (
           <tbody>
-            {recordList.map(({ date, id, size, time }) => (
+            {recordList.map(({ date, id, size, time, difficulty }) => (
               <tr key={id}>
                 <Td>{moment(date).format('YYYY-MM-DD')}</Td>
                 <Td>{moment(date).format('HH:mm:ss')}</Td>
+                <Td>{difficulty}</Td>
                 <Td>{`${size}x${size}`}</Td>
                 <Td>{formatTimekeeper(time)}</Td>
               </tr>

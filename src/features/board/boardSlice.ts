@@ -6,6 +6,7 @@ import createBoard from '../../utils/createBoard'
 import countCoincidences from '../../utils/matrix/countCoincidences'
 import createMatrix from '../../utils/matrix/createMatrix'
 import recordsInterface from '../../utils/recordsInterface'
+import DIFFICULTY_MAP from '../../utils/difficultyMap'
 
 export interface BoardState {
   game: Board
@@ -40,17 +41,10 @@ export const boardSlice = createSlice({
     createGame: (state, action: PayloadAction<CreateGamePayload>) => {
       state.game = createMatrix(action.payload.size)
 
-      if (action.payload.difficulty === 'easy') {
-        state.mines = Math.floor(action.payload.size * 1.5)
-      }
-
-      if (action.payload.difficulty === 'medium') {
-        state.mines = Math.floor(action.payload.size * 2)
-      }
-
-      if (action.payload.difficulty === 'hard') {
-        state.mines = Math.floor(action.payload.size * 2)
-      }
+      state.mines = Math.floor(
+        action.payload.size *
+          DIFFICULTY_MAP[action.payload.difficulty.toUpperCase()]
+      )
 
       state.board = createBoard(action.payload.size, state.mines)
       state.initTime = moment().toISOString()
@@ -64,13 +58,22 @@ export const boardSlice = createSlice({
         state.game.length ** 2 - state.mines ===
         countCoincidences(state.game, 1)
       ) {
-        state.isWinner = true
-        if (!state.didLose) {
-          recordsInterface.setRecords({
-            size: state.game.length,
-            initTime: moment(state.initTime)
-          })
-        }
+        boardSlice.actions.winGame()
+      }
+    },
+    winGame: (state) => {
+      state.isWinner = true
+      if (!state.didLose) {
+        recordsInterface.setRecords({
+          size: state.game.length,
+          difficulty:
+            state.mines / state.board.length > 2
+              ? 'HARD'
+              : state.mines / state.board.length < 2
+                ? 'EASY'
+                : 'MEDIUM',
+          initTime: moment(state.initTime)
+        })
       }
     },
     loseGame: (state) => {
@@ -100,10 +103,11 @@ export const {
   createGame,
   keepPlaying,
   loseGame,
+  revealTile,
   updateGame,
   removeFlag,
   resetGame,
-  revealTile
+  winGame
 } = boardSlice.actions
 
 export default boardSlice.reducer
