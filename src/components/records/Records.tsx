@@ -3,6 +3,7 @@ import moment from "moment";
 import formatTimekeeper from "../../utils/formatTimekeeper";
 import recordsInterface from "../../utils/recordsInterface";
 import { Button, Container, Table, Td, Th } from "./Records.styles";
+import { BaseH2 } from "../common.styles";
 
 interface RecordsProps {
   toggleRecords: () => void;
@@ -13,7 +14,7 @@ function Records({ toggleRecords }: RecordsProps): JSX.Element {
 
   return (
     <Container>
-      <h2>Records</h2>
+      <BaseH2>Records</BaseH2>
       <Table>
         <thead>
           <tr>

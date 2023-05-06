@@ -47,3 +47,27 @@ export const BaseInput = styled.input`
   border: 1px solid ${(props) => props.theme.mainColor};
   background-color: ${(props) => props.theme.bgColor};
 `;
+
+export const BaseH1 = styled.h1`
+  color: ${(props) => props.theme.mainColor};
+`;
+
+export const BaseH2 = styled.h2`
+  color: ${(props) => props.theme.mainColor};
+`;
+
+export const BaseH3 = styled.h3`
+  color: ${(props) => props.theme.mainColor};
+`;
+
+export const BaseH4 = styled.h4`
+  color: ${(props) => props.theme.mainColor};
+`;
+
+export const BaseH5 = styled.h5`
+  color: ${(props) => props.theme.mainColor};
+`;
+
+export const BaseH6 = styled.h6`
+  color: ${(props) => props.theme.mainColor};
+`;

@@ -21,7 +21,7 @@ import {
   Overlay,
   Row,
 } from "./Board.styles";
-import { BaseButton, BaseModal } from "../common.styles";
+import { BaseButton, BaseH2, BaseH4, BaseModal } from "../common.styles";
 
 export default function Board(): JSX.Element {
   const { game, board, mines, flags, isWinner, didLose, isLoser } = useSelector(
@@ -71,14 +71,14 @@ export default function Board(): JSX.Element {
       )}
       {!isWinner && (
         <>
-          <h4>{`Unmarked mines: ${mines - flags}`}</h4>
+          <BaseH4>{`Unmarked mines: ${mines - flags}`}</BaseH4>
         </>
       )}
       <TimeKeeper stop={isWinner || didLose} />
       {isLoser && didLose && (
         <Overlay>
           <BaseModal>
-            <h2>Game over</h2>
+            <BaseH2>Game over</BaseH2>
             <GameOverText>
               If you keep playing, your game time won&apos;t be registered
             </GameOverText>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { BaseInput } from "../common.styles";
+import { BaseH1, BaseInput } from "../common.styles";
 
-export const Title = styled.h1`
+export const Title = styled(BaseH1)`
   textoverflow: ellipsis;
   textalign: center;
   whitespace: nowrap;
@@ -16,6 +16,10 @@ export const Container = styled.div`
 
 export const List = styled.ul`
   padding: 0 15px 0 50px;
+`;
+
+export const ListItem = styled.li`
+  color: ${(props) => props.theme.mainColor};
 `;
 
 export const Form = styled.form`
@@ -35,4 +39,8 @@ export const ButtonsBox = styled.div`
 export const TextInput = styled(BaseInput)`
   max-width: 120px;
   margin-top: 15px;
+`;
+
+export const Label = styled.label`
+  color: ${(props) => props.theme.mainColor};
 `;
