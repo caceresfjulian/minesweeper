@@ -58,7 +58,19 @@ export const boardSlice = createSlice({
         state.game.length ** 2 - state.mines ===
         countCoincidences(state.game, 1)
       ) {
-        boardSlice.actions.winGame();
+        state.isWinner = true;
+        if (!state.didLose) {
+          recordsInterface.setRecords({
+            size: state.game.length,
+            difficulty:
+              state.mines / state.board.length > 2
+                ? "HARD"
+                : state.mines / state.board.length < 2
+                ? "EASY"
+                : "MEDIUM",
+            initTime: moment(state.initTime),
+          });
+        }
       }
     },
     winGame: (state) => {
