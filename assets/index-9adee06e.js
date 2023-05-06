@@ -102,7 +102,7 @@ M.version="2.29.4";tS(he);M.fn=C;M.min=U_;M.max=H_;M.now=V_;M.utc=qt;M.unix=gx;M
 `,K0=ue.div`
   background-color: ${e=>e.theme.transparencyColor};
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   align-items: center;
   justify-content: center;
