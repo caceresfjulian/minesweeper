@@ -44,3 +44,11 @@ export const TextInput = styled(BaseInput)`
 export const Label = styled.label`
   color: ${(props) => props.theme.mainColor};
 `;
+
+export const DesktopOnlyOption = styled.option`
+  display: inline;
+
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+`;

@@ -8,6 +8,7 @@ import {
   Title,
   ListItem,
   Label,
+  DesktopOnlyOption,
 } from "./InitScreen.styles";
 import { BaseButton, BaseH2, BaseSelect } from "../common.styles";
 
@@ -41,9 +42,9 @@ export default function InitScreen({
           <Label>
             Size:&nbsp;
             <BaseSelect name="size">
-              <option value="16">16 x 16</option>
-              <option value="8">8 x 8</option>
               <option value="5">5 x 5</option>
+              <option value="8">8 x 8</option>
+              <DesktopOnlyOption value="16">16 x 16</DesktopOnlyOption>
             </BaseSelect>
           </Label>
           <Label>
