@@ -21,7 +21,7 @@ export const BaseSelect = styled.select`
 export const BaseOverlay = styled.div`
   background-color: ${props => props.theme.transparencyColor};
   width: 100%;
-  height: 100%;
+  height: 100vh;
   position: absolute;
   align-items: center;
   justify-content: center;
