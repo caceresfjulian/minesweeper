@@ -11,6 +11,7 @@ export const Main = styled.main`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding-top: 40px;
 `;
 
 export const Button = styled(BaseButton)`

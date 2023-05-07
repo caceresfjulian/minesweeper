@@ -2,7 +2,17 @@ import React from "react";
 import moment from "moment";
 import formatTimekeeper from "../../utils/formatTimekeeper";
 import recordsInterface from "../../utils/recordsInterface";
-import { Button, Container, Table, Td, Th } from "./Records.styles";
+import {
+  Button,
+  Container,
+  TBody,
+  THead,
+  Table,
+  Td,
+  TdDesktopOnly,
+  Th,
+  ThDesktopOnly,
+} from "./Records.styles";
 import { BaseH2 } from "../lib/common.styles";
 
 interface RecordsProps {
@@ -16,27 +26,31 @@ function Records({ toggleRecords }: RecordsProps): JSX.Element {
     <Container>
       <BaseH2>Records</BaseH2>
       <Table>
-        <thead>
+        <THead>
           <tr>
-            <Th>Date</Th>
-            <Th>Time</Th>
-            <Th>Difficulty</Th>
-            <Th>Board size</Th>
-            <Th>Duration</Th>
+            <Th style={{ width: 180 }}>Date</Th>
+            <ThDesktopOnly style={{ width: 150 }}>Time</ThDesktopOnly>
+            <Th style={{ width: 220 }}>Level</Th>
+            <Th style={{ width: 150 }}>Board size</Th>
+            <Th style={{ width: 200 }}>Duration</Th>
           </tr>
-        </thead>
+        </THead>
         {recordList.length > 0 && (
-          <tbody>
+          <TBody>
             {recordList.map(({ date, id, size, time, difficulty }) => (
               <tr key={id}>
-                <Td>{moment(date).format("YYYY-MM-DD")}</Td>
-                <Td>{moment(date).format("HH:mm:ss")}</Td>
-                <Td>{difficulty}</Td>
-                <Td>{`${size}x${size}`}</Td>
-                <Td>{formatTimekeeper(time)}</Td>
+                <Td style={{ width: 180 }}>
+                  {moment(date).format("YYYY-MM-DD")}
+                </Td>
+                <TdDesktopOnly style={{ width: 150 }}>
+                  {moment(date).format("HH:mm:ss")}
+                </TdDesktopOnly>
+                <Td style={{ width: 220 }}>{difficulty}</Td>
+                <Td style={{ width: 150 }}>{`${size}x${size}`}</Td>
+                <Td style={{ width: 200 }}>{formatTimekeeper(time)}</Td>
               </tr>
             ))}
-          </tbody>
+          </TBody>
         )}
       </Table>
       <Button type="button" onClick={toggleRecords}>

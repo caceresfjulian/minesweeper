@@ -9,8 +9,9 @@ import {
   ListItem,
   Label,
   DesktopOnlyOption,
+  FormContainer,
 } from "./InitScreen.styles";
-import { BaseButton, BaseH2, BaseSelect } from "../lib/common.styles";
+import { BaseButton, BaseH3, BaseSelect } from "../lib/common.styles";
 
 interface InitScreenProps {
   createBoard: (e: InitForm) => void;
@@ -26,7 +27,7 @@ export default function InitScreen({
   return (
     <>
       <Title>Minesweeper</Title>
-      <BaseH2>By Julian Caceres</BaseH2>
+      <BaseH3>By Julian Caceres</BaseH3>
       <Container>
         <List>
           <ListItem>
@@ -39,28 +40,30 @@ export default function InitScreen({
           </ListItem>
         </List>
         <Form onSubmit={createBoard}>
-          <Label>
-            Size:&nbsp;
-            <BaseSelect name="size">
-              <option value="5">5 x 5</option>
-              <option value="8">8 x 8</option>
-              <DesktopOnlyOption value="16">16 x 16</DesktopOnlyOption>
-            </BaseSelect>
-          </Label>
-          <Label>
-            Difficulty:&nbsp;
-            <BaseSelect name="difficulty">
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </BaseSelect>
-          </Label>
-          <ButtonsBox>
-            <BaseButton type="submit">Start game</BaseButton>
-            <BaseButton type="button" onClick={toggleRecords}>
-              Highest records
-            </BaseButton>
-          </ButtonsBox>
+          <FormContainer>
+            <Label>
+              Size:&nbsp;
+              <BaseSelect name="size">
+                <option value="5">5 x 5</option>
+                <option value="8">8 x 8</option>
+                <DesktopOnlyOption value="16">16 x 16</DesktopOnlyOption>
+              </BaseSelect>
+            </Label>
+            <Label>
+              Difficulty:&nbsp;
+              <BaseSelect name="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </BaseSelect>
+            </Label>
+            <ButtonsBox>
+              <BaseButton type="submit">Start game</BaseButton>
+              <BaseButton type="button" onClick={toggleRecords}>
+                Highest records
+              </BaseButton>
+            </ButtonsBox>
+          </FormContainer>
         </Form>
       </Container>
     </>

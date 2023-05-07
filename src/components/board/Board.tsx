@@ -16,14 +16,13 @@ import {
   BoardContainer,
   Button,
   Cell,
-  GameOverButtonsBox,
-  GameOverText,
+  Header,
   MobileLabel,
-  Overlay,
   Row,
 } from "./Board.styles";
-import { BaseButton, BaseH2, BaseH4, BaseModal } from "../lib/common.styles";
+import { BaseH2, BaseH3 } from "../lib/common.styles";
 import Checkbox from "../lib/Checkbox";
+import GameOverModal from "../gameOverModal/GameOverModal";
 
 export default function Board(): JSX.Element {
   const [markFlags, setMarkFlags] = useState<boolean>(false);
@@ -78,12 +77,12 @@ export default function Board(): JSX.Element {
     <>
       {isWinner && (
         <>
-          <h2>Congratulations!</h2>
+          <BaseH2>You won!</BaseH2>
         </>
       )}
       {!isWinner && (
-        <>
-          <BaseH4>{`Unmarked mines: ${mines - flags}`}</BaseH4>
+        <Header>
+          <BaseH3>{`Unmarked mines: ${mines - flags}`}</BaseH3>
           <MobileLabel>
             Mark flags
             <Checkbox
@@ -91,26 +90,14 @@ export default function Board(): JSX.Element {
               handleCheckboxChange={handleCheckboxChange}
             />
           </MobileLabel>
-        </>
+        </Header>
       )}
       <TimeKeeper stop={isWinner || didLose} />
       {isLoser && didLose && (
-        <Overlay>
-          <BaseModal>
-            <BaseH2>Game over</BaseH2>
-            <GameOverText>
-              If you keep playing, your game time won&apos;t be registered
-            </GameOverText>
-            <GameOverButtonsBox>
-              <BaseButton onClick={() => dispatch(keepPlaying())}>
-                Keep playing
-              </BaseButton>
-              <BaseButton onClick={() => dispatch(resetGame())}>
-                Main Screen
-              </BaseButton>
-            </GameOverButtonsBox>
-          </BaseModal>
-        </Overlay>
+        <GameOverModal
+          keepPlaying={() => dispatch(keepPlaying())}
+          resetGame={() => dispatch(resetGame())}
+        />
       )}
       {
         <BoardContainer>

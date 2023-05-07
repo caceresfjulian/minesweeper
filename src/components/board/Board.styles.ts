@@ -1,23 +1,22 @@
 import styled from "styled-components";
-import { BaseButton, BaseLabel, BaseOverlay } from "../lib/common.styles";
+import { BaseButton, BaseLabel } from "../lib/common.styles";
 
-export const Overlay = styled(BaseOverlay)`
-  display: flex;
+export const Header = styled.div`
+  @media screen and (max-width: 767px) {
+    margin: 0 15px max(12px, 2vh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 `;
-export const GameOverText = styled.p`
-  margin-top: 20px;
-  font-size: 18px;
-`;
-export const GameOverButtonsBox = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-`;
+
 export const BoardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border: 5px solid ${(props) => props.theme.mainColor};
 `;
+
 export const Row = styled.div`
   display: flex;
 `;

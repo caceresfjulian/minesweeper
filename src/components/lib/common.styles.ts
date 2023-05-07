@@ -6,15 +6,15 @@ export const BaseButton = styled.button`
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.mainColor};
   font-family: "Silkscreen", cursive;
-  padding: 5px;
+  padding: max(8px, 0.5vw);
   cursor: pointer;
-  font-size: 18px;
+  font-size: max(18px, 2.4vh);
 `;
 export const BaseSelect = styled.select`
   font-family: "Silkscreen", cursive;
   padding: 5px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: max(14px, 2.2vh);
   color: ${(props) => props.theme.mainColor};
   border: 1px solid ${(props) => props.theme.mainColor};
   background-color: ${(props) => props.theme.bgColor};
@@ -51,6 +51,7 @@ export const BaseInput = styled.input`
 
 export const BaseLabel = styled.label`
   color: ${(props) => props.theme.mainColor};
+  font-size: max(18px, 2.4vh);
 `;
 
 export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
@@ -85,8 +86,6 @@ export const ShownCheckbox = styled.div`
 
   border: 1px solid ${(props) => props.theme.mainColor};
 
-  transition: none;
-
   ${Icon} {
     visibility: ${(props) => (props.checked ? "visible" : "hidden")};
   }
@@ -94,18 +93,22 @@ export const ShownCheckbox = styled.div`
 
 export const BaseH1 = styled.h1`
   color: ${(props) => props.theme.mainColor};
+  font-size: min(9vw, 56px);
 `;
 
 export const BaseH2 = styled.h2`
   color: ${(props) => props.theme.mainColor};
+  font-size: min(8vw, 52px);
 `;
 
 export const BaseH3 = styled.h3`
   color: ${(props) => props.theme.mainColor};
+  font-size: min(6vw, 42px);
 `;
 
 export const BaseH4 = styled.h4`
   color: ${(props) => props.theme.mainColor};
+  font-size: min(5vw, 36px);
 `;
 
 export const BaseH5 = styled.h5`
