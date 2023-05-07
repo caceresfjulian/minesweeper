@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { type Theme } from "../../theming/theme";
 
 export const BaseButton = styled.button`
   border: 1px solid ${(props) => props.theme.mainColor};
@@ -46,6 +47,49 @@ export const BaseInput = styled.input`
   color: ${(props) => props.theme.mainColor};
   border: 1px solid ${(props) => props.theme.mainColor};
   background-color: ${(props) => props.theme.bgColor};
+`;
+
+export const BaseLabel = styled.label`
+  color: ${(props) => props.theme.mainColor};
+`;
+
+export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+  border: 0;
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+`;
+
+export const Icon = styled.svg`
+  fill: none;
+  stroke: ${(props) => props.theme.bgColor};
+  stroke-width: 2px;
+`;
+
+interface ShownCheckboxProps {
+  checked: boolean;
+  theme: Theme;
+}
+
+export const ShownCheckbox = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 18px;
+  height: 18px;
+
+  background: ${(props: ShownCheckboxProps) =>
+    props.checked ? props.theme.mainColor : props.theme.bgColor};
+
+  border: 1px solid ${(props) => props.theme.mainColor};
+
+  transition: none;
+
+  ${Icon} {
+    visibility: ${(props) => (props.checked ? "visible" : "hidden")};
+  }
 `;
 
 export const BaseH1 = styled.h1`

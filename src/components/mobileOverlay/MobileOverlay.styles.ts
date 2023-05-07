@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BaseOverlay } from "../common.styles";
+import { BaseOverlay } from "../lib/common.styles";
 
 export const Overlay = styled(BaseOverlay)`
   display: none;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BaseButton, BaseOverlay } from "../common.styles";
+import { BaseButton, BaseLabel, BaseOverlay } from "../lib/common.styles";
 
 export const Overlay = styled(BaseOverlay)`
   display: flex;
@@ -45,4 +45,14 @@ export const Cell = styled.div<CellProps>`
 
 export const Button = styled(BaseButton)`
   margin-top: 15px;
+`;
+
+export const MobileLabel = styled(BaseLabel)`
+  display: none;
+
+  @media screen and (max-width: 767px) {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
 `;

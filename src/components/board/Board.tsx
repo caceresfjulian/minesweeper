@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type ChangeEvent, useState } from "react";
 import revealNeighbors from "../../utils/revealNeighbors";
 import TimeKeeper from "../timeKeeper/TimeKeeper";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,18 +18,26 @@ import {
   Cell,
   GameOverButtonsBox,
   GameOverText,
+  MobileLabel,
   Overlay,
   Row,
 } from "./Board.styles";
-import { BaseButton, BaseH2, BaseH4, BaseModal } from "../common.styles";
+import { BaseButton, BaseH2, BaseH4, BaseModal } from "../lib/common.styles";
+import Checkbox from "../lib/Checkbox";
 
 export default function Board(): JSX.Element {
+  const [markFlags, setMarkFlags] = useState<boolean>(false);
   const { game, board, mines, flags, isWinner, didLose, isLoser } = useSelector(
     (state: RootState) => state.board
   );
   const dispatch = useDispatch();
 
   const handleClick = (i: number, j: number): void => {
+    if (markFlags) {
+      handleRightClick(i, j);
+      return;
+    }
+
     if (isWinner) {
       return;
     }
@@ -62,6 +70,10 @@ export default function Board(): JSX.Element {
     }
   };
 
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setMarkFlags(e.target.checked);
+  };
+
   return (
     <>
       {isWinner && (
@@ -72,6 +84,13 @@ export default function Board(): JSX.Element {
       {!isWinner && (
         <>
           <BaseH4>{`Unmarked mines: ${mines - flags}`}</BaseH4>
+          <MobileLabel>
+            Mark flags
+            <Checkbox
+              checked={markFlags}
+              handleCheckboxChange={handleCheckboxChange}
+            />
+          </MobileLabel>
         </>
       )}
       <TimeKeeper stop={isWinner || didLose} />

@@ -10,7 +10,7 @@ import {
   Label,
   DesktopOnlyOption,
 } from "./InitScreen.styles";
-import { BaseButton, BaseH2, BaseSelect } from "../common.styles";
+import { BaseButton, BaseH2, BaseSelect } from "../lib/common.styles";
 
 interface InitScreenProps {
   createBoard: (e: InitForm) => void;

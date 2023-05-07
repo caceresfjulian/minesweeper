@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BaseH1, BaseInput } from "../common.styles";
+import { BaseH1, BaseInput } from "../lib/common.styles";
 
 export const Title = styled(BaseH1)`
   textoverflow: ellipsis;

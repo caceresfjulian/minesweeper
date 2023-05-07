@@ -1,6 +1,6 @@
 import React from "react";
 import { Overlay } from "./MobileOverlay.styles";
-import { BaseModal } from "../common.styles";
+import { BaseModal } from "../lib/common.styles";
 
 function MobileOverlay(): JSX.Element {
   return (

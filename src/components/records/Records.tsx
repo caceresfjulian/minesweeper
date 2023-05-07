@@ -3,7 +3,7 @@ import moment from "moment";
 import formatTimekeeper from "../../utils/formatTimekeeper";
 import recordsInterface from "../../utils/recordsInterface";
 import { Button, Container, Table, Td, Th } from "./Records.styles";
-import { BaseH2 } from "../common.styles";
+import { BaseH2 } from "../lib/common.styles";
 
 interface RecordsProps {
   toggleRecords: () => void;
