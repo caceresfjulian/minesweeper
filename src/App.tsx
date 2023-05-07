@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { type InitForm } from "./App.types.js";
 import Board from "./components/board/Board.js";
 import InitScreen from "./components/initScreen/InitScreen.js";
-import MobileOverlay from "./components/mobileOverlay/MobileOverlay.js";
 import Records from "./components/records/Records.js";
 import { createGame } from "./features/board/boardSlice.js";
 import { type RootState } from "./store.js";
@@ -46,7 +45,6 @@ function App(): JSX.Element {
       )}
       {game.length !== 0 && <Board />}
       {showRecords && <Records toggleRecords={toggleRecords} />}
-      <MobileOverlay />
     </Main>
   );
 }
