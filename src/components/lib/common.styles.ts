@@ -26,6 +26,7 @@ export const BaseOverlay = styled.div`
   position: absolute;
   align-items: center;
   justify-content: center;
+  top: 0;
 `;
 export const BaseModal = styled.div`
   background-color: ${(props) => props.theme.bgColor};
