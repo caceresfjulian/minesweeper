@@ -24,7 +24,7 @@ import { BaseH2, BaseH3 } from "../lib/common.styles";
 import Checkbox from "../lib/Checkbox";
 import GameOverModal from "../gameOverModal/GameOverModal";
 
-export default function Board(): JSX.Element {
+const Board = (): JSX.Element => {
   const [markFlags, setMarkFlags] = useState<boolean>(false);
   const { game, board, mines, flags, isWinner, didLose, isLoser } = useSelector(
     (state: RootState) => state.board
@@ -128,4 +128,6 @@ export default function Board(): JSX.Element {
       <Button onClick={() => dispatch(resetGame())}>Main Screen</Button>
     </>
   );
-}
+};
+
+export default Board;

@@ -19,7 +19,7 @@ interface RecordsProps {
   toggleRecords: () => void;
 }
 
-function Records({ toggleRecords }: RecordsProps): JSX.Element {
+const Records = ({ toggleRecords }: RecordsProps): JSX.Element => {
   const recordList = recordsInterface.getRecords();
 
   return (
@@ -58,6 +58,6 @@ function Records({ toggleRecords }: RecordsProps): JSX.Element {
       </Button>
     </Container>
   );
-}
+};
 
 export default Records;

@@ -19,11 +19,11 @@ interface InitScreenProps {
   formError: boolean;
 }
 
-export default function InitScreen({
+const InitScreen = ({
   createBoard,
   toggleRecords,
   formError,
-}: InitScreenProps): JSX.Element {
+}: InitScreenProps): JSX.Element => {
   return (
     <>
       <Title>Minesweeper</Title>
@@ -68,4 +68,6 @@ export default function InitScreen({
       </Container>
     </>
   );
-}
+};
+
+export default InitScreen;

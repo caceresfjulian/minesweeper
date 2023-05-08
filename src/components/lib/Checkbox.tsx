@@ -7,15 +7,17 @@ const CheckboxContainer = styled.div`
   vertical-align: middle;
 `;
 
+interface CheckboxProps {
+  className?: string;
+  checked: boolean;
+  handleCheckboxChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
 const Checkbox = ({
   className,
   checked,
   handleCheckboxChange,
-}: {
-  className?: string;
-  checked: boolean;
-  handleCheckboxChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}): JSX.Element => (
+}: CheckboxProps): JSX.Element => (
   <CheckboxContainer className={className}>
     <HiddenCheckbox checked={checked} onChange={handleCheckboxChange} />
     <ShownCheckbox checked={checked}>

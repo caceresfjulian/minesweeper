@@ -9,7 +9,7 @@ import { type RootState } from "./store.js";
 import { Button, Main } from "./App.styles.js";
 import { toggleTheme } from "./features/theme/themeSlice.js";
 
-function App(): JSX.Element {
+const App = (): JSX.Element => {
   const [showRecords, setShowRecords] = useState<boolean>(false);
   const [formError, setFormError] = useState<boolean>(false);
   const game = useSelector((state: RootState) => state.board.game);
@@ -47,6 +47,6 @@ function App(): JSX.Element {
       {showRecords && <Records toggleRecords={toggleRecords} />}
     </Main>
   );
-}
+};
 
 export default App;
