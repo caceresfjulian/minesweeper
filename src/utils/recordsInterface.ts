@@ -27,7 +27,7 @@ const recordsInterface: RecordsInterface = {
   },
 
   setRecords({ size, difficulty, initTime }) {
-    const storedRecords = this.getRecords();
+    let storedRecords = this.getRecords();
     const newRecord = {
       id: nanoid(),
       size,
@@ -39,12 +39,26 @@ const recordsInterface: RecordsInterface = {
     if (storedRecords.length === 0) {
       storedRecords.push(newRecord);
     } else {
-      for (let i = 0; i < storedRecords.length; i++) {
-        if (storedRecords[i].time > newRecord.time) {
-          storedRecords.splice(i, 0, newRecord);
-          break;
+      if (storedRecords[0].time > newRecord.time) {
+        storedRecords.unshift(newRecord);
+      } else if (
+        storedRecords[storedRecords.length - 1].time < newRecord.time
+      ) {
+        storedRecords.push(newRecord);
+      } else {
+        for (let i = 0; i < storedRecords.length; i++) {
+          if (storedRecords[i].time > newRecord.time) {
+            storedRecords.splice(i, 0, newRecord);
+            break;
+          } else if (i === storedRecords.length - 1) {
+            storedRecords.push(newRecord);
+          }
         }
       }
+    }
+
+    if (storedRecords.length > 10) {
+      storedRecords = storedRecords.slice(0, 10);
     }
 
     localStorage.setItem("MINESWEEPER_RECORDS", JSON.stringify(storedRecords));
