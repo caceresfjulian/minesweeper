@@ -28,13 +28,24 @@ const recordsInterface: RecordsInterface = {
 
   setRecords({ size, difficulty, initTime }) {
     const storedRecords = this.getRecords();
-    storedRecords.push({
+    const newRecord = {
       id: nanoid(),
       size,
       difficulty,
       time: moment().diff(initTime, "seconds"),
       date: new Date().toISOString(),
-    });
+    };
+
+    if (storedRecords.length === 0) {
+      storedRecords.push(newRecord);
+    } else {
+      for (let i = 0; i < storedRecords.length; i++) {
+        if (storedRecords[i].time > newRecord.time) {
+          storedRecords.splice(i, 0, newRecord);
+          break;
+        }
+      }
+    }
 
     localStorage.setItem("MINESWEEPER_RECORDS", JSON.stringify(storedRecords));
   },
